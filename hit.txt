@@ -1,1 +1,16 @@
-我们可以从下面这个例子中知道最新的utils调用方法，传统的from keras.utils.visualize_utils import plot以及from keras.vis_utils import plot的用法已经不再适用于最新版Keras（截止到2023.8.28）,目前可以使用from tensorflow.keras import utils
+#我们可以从下面这个例子中知道最新的utils调用方法，传统的from keras.utils.visualize_utils import plot以及from keras.vis_utils import plot的用法已经不再适用于最新版Keras（截止到2023.8.28）,目前可以使用from tensorflow.keras import utils
+import tensorflow as tf
+import matplotlib.pyplot as plt
+#from tensorflow.keras import datasets,layers,Sequential,losses,optimizers,utils
+import keras
+from keras import models, layers, utils, optimizers
+ 
+(x_train,y_train),(x_test,y_test)=datasets.mnist.load_data()
+x_train,x_test=x_train/255.0,x_test/255.0
+ 
+model = Sequential([
+    layers.Flatten(input_shape=(28,28)),       # 28*28是一个图片的尺寸
+    layers.Dense(128,activation="relu"),
+    layers.Dense(10,activation="softmax")    
+                            ])
+utils.plot_model(model, to_file='model.png')
